@@ -1,39 +1,103 @@
 {
-  "version": 2.0,
-  "questions": [
-    {
-      "question": "This is a Sample Question 1?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
-    },
-    {
-      "question": "This is a Sample Question 2?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "c",
-      "difficulty": "beginner"
-    }
-  ]
+    "questions": [
+        {
+            "question": "If you multiply a 4x2 matrix by a 2x5 matrix, what are the dimensions of the product?",
+            "options": [
+                "4x5",
+                "2x2",
+                "5x4",
+                "2x5"
+            ],
+            "answer": "4x5",
+            "level": "easy"
+        },
+        {
+            "question": "Is matrix multiplication commutative (i.e., is AB always equal to BA)?",
+            "options": [
+                "Yes",
+                "No",
+                "Only if A and B are square matrices",
+                "Only if A and B have the same dimensions"
+            ],
+            "answer": "No",
+            "level": "easy"
+        },
+        {
+            "question": "To multiply two matrices, the number of columns in the first matrix must be equal to the number of ____ in the second matrix.",
+            "options": [
+                "rows",
+                "columns",
+                "elements",
+                "diagonals"
+            ],
+            "answer": "rows",
+            "level": "easy"
+        },
+        {
+            "question": "What is the distributive property of matrix multiplication over addition?",
+            "options": [
+                "A(B+C) = AB + AC",
+                "A(BC) = (AB)C",
+                "AB = BA",
+                "A+B = B+A"
+            ],
+            "answer": "A(B+C) = AB + AC",
+            "level": "intermediate"
+        },
+        {
+            "question": "Which algorithm is a divide-and-conquer algorithm for matrix multiplication that is faster than the naive O(n^3) algorithm?",
+            "options": [
+                "Strassen's algorithm",
+                "Dijkstra's algorithm",
+                "Prim's algorithm",
+                "Kruskal's algorithm"
+            ],
+            "answer": "Strassen's algorithm",
+            "level": "intermediate"
+        },
+        {
+            "question": "What is the identity matrix for multiplication of 3x3 matrices?",
+            "options": [
+                "A 3x3 matrix of all 1s",
+                "A 3x3 matrix of all 0s",
+                "A 3x3 matrix with 1s on the diagonal and 0s elsewhere",
+                "A 3x3 matrix with 0s on the diagonal and 1s elsewhere"
+            ],
+            "answer": "A 3x3 matrix with 1s on the diagonal and 0s elsewhere",
+            "level": "intermediate"
+        },
+        {
+            "question": "In the context of this experiment, what is the role of the 'master' process in MPI?",
+            "options": [
+                "It performs all the computations.",
+                "It distributes the work to worker processes and gathers the results.",
+                "It only stores the final result.",
+                "It is not used in this experiment."
+            ],
+            "answer": "It distributes the work to worker processes and gathers the results.",
+            "level": "advanced"
+        },
+        {
+            "question": "What does 'scalability' mean in the context of parallel computing?",
+            "options": [
+                "The ability of a system to handle an increasing amount of work by adding resources.",
+                "The speed of a single processor.",
+                "The total memory of the system.",
+                "The number of programming languages supported."
+            ],
+            "answer": "The ability of a system to handle an increasing amount of work by adding resources.",
+            "level": "advanced"
+        },
+        {
+            "question": "What is a potential bottleneck in parallel matrix multiplication?",
+            "options": [
+                "Data distribution and collection overhead",
+                "Processor speed",
+                "Matrix size",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "level": "advanced"
+        }
+    ]
 }
