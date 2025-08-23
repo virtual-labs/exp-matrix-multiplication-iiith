@@ -1,103 +1,158 @@
 {
+    "version": 2.0,
     "questions": [
         {
             "question": "What is the dimension of the resulting matrix when a 2x3 matrix is multiplied by a 3x4 matrix?",
-            "options": [
-                "2x4",
-                "3x3",
-                "4x2",
-                "3x4"
-            ],
-            "answer": "2x4",
-            "level": "easy"
+            "answers": {
+                "a": "2x4",
+                "b": "3x3",
+                "c": "4x2",
+                "d": "3x4"
+            },
+            "explanations": {
+                "a": "Correct. The resulting matrix has the number of rows of the first matrix and the number of columns of the second matrix.",
+                "b": "Incorrect.",
+                "c": "Incorrect.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "a",
+            "difficulty": "beginner"
         },
         {
             "question": "Which of the following is a necessary condition for matrix multiplication AB to be defined?",
-            "options": [
-                "The number of rows in A must equal the number of columns in B.",
-                "The number of columns in A must equal the number of rows in B.",
-                "A and B must be square matrices.",
-                "A and B must have the same dimensions."
-            ],
-            "answer": "The number of columns in A must equal the number of rows in B.",
-            "level": "easy"
+            "answers": {
+                "a": "The number of rows in A must equal the number of columns in B.",
+                "b": "The number of columns in A must equal the number of rows in B.",
+                "c": "A and B must be square matrices.",
+                "d": "A and B must have the same dimensions."
+            },
+            "explanations": {
+                "a": "Incorrect.",
+                "b": "Correct. The inner dimensions must match.",
+                "c": "Incorrect.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "b",
+            "difficulty": "beginner"
         },
         {
             "question": "If A is a 3x2 matrix and B is a 2x1 matrix, what are the dimensions of A*B?",
-            "options": [
-                "3x1",
-                "1x3",
-                "2x2",
-                "3x2"
-            ],
-            "answer": "3x1",
-            "level": "easy"
+            "answers": {
+                "a": "3x1",
+                "b": "1x3",
+                "c": "2x2",
+                "d": "3x2"
+            },
+            "explanations": {
+                "a": "Correct. The resulting matrix has dimensions 3x1.",
+                "b": "Incorrect.",
+                "c": "Incorrect.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "a",
+            "difficulty": "beginner"
         },
         {
             "question": "Matrix multiplication is associative. What does this mean?",
-            "options": [
-                "A(BC) = (AB)C",
-                "AB = BA",
-                "A(B+C) = AB+AC",
-                "A+B = B+A"
-            ],
-            "answer": "A(BC) = (AB)C",
-            "level": "intermediate"
+            "answers": {
+                "a": "A(BC) = (AB)C",
+                "b": "AB = BA",
+                "c": "A(B+C) = AB+AC",
+                "d": "A+B = B+A"
+            },
+            "explanations": {
+                "a": "Correct. This is the definition of associativity.",
+                "b": "Incorrect. This is commutativity, which doesn't hold for matrix multiplication.",
+                "c": "Incorrect. This is distributivity.",
+                "d": "Incorrect. This is commutativity of addition."
+            },
+            "correctAnswer": "a",
+            "difficulty": "intermediate"
         },
         {
             "question": "What is the time complexity of the naive matrix multiplication algorithm for two n x n matrices?",
-            "options": [
-                "O(n)",
-                "O(n^2)",
-                "O(n^3)",
-                "O(log n)"
-            ],
-            "answer": "O(n^3)",
-            "level": "intermediate"
+            "answers": {
+                "a": "O(n)",
+                "b": "O(n^2)",
+                "c": "O(n^3)",
+                "d": "O(log n)"
+            },
+            "explanations": {
+                "a": "Incorrect.",
+                "b": "Incorrect.",
+                "c": "Correct. It involves three nested loops.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "c",
+            "difficulty": "intermediate"
         },
         {
             "question": "Which of the following is NOT a property of matrix multiplication?",
-            "options": [
-                "Associativity",
-                "Distributivity",
-                "Commutativity",
-                "Identity Property"
-            ],
-            "answer": "Commutativity",
-            "level": "intermediate"
+            "answers": {
+                "a": "Associativity",
+                "b": "Distributivity",
+                "c": "Commutativity",
+                "d": "Identity Property"
+            },
+            "explanations": {
+                "a": "Incorrect. Matrix multiplication is associative.",
+                "b": "Incorrect. Matrix multiplication is distributive over addition.",
+                "c": "Correct. Matrix multiplication is generally not commutative (AB != BA).",
+                "d": "Incorrect. There is an identity matrix for multiplication."
+            },
+            "correctAnswer": "c",
+            "difficulty": "intermediate"
         },
         {
             "question": "What is the main advantage of using parallel algorithms for matrix multiplication?",
-            "options": [
-                "Reduced complexity",
-                "Increased accuracy",
-                "Faster computation time",
-                "Simpler implementation"
-            ],
-            "answer": "Faster computation time",
-            "level": "advanced"
+            "answers": {
+                "a": "Reduced complexity",
+                "b": "Increased accuracy",
+                "c": "Faster computation time",
+                "d": "Simpler implementation"
+            },
+            "explanations": {
+                "a": "Incorrect. The algorithmic complexity doesn't change, but the execution time does.",
+                "b": "Incorrect. Accuracy is not the primary goal.",
+                "c": "Correct. Parallelism is used to reduce the wall-clock time.",
+                "d": "Incorrect. Parallel implementations are often more complex."
+            },
+            "correctAnswer": "c",
+            "difficulty": "advanced"
         },
         {
             "question": "In a distributed memory system, what is a common strategy for partitioning data for parallel matrix multiplication?",
-            "options": [
-                "Row-wise partitioning of the first matrix",
-                "Column-wise partitioning of the second matrix",
-                "Both A and B",
-                "None of the above"
-            ],
-            "answer": "Both A and B",
-            "level": "advanced"
+            "answers": {
+                "a": "Row-wise partitioning of the first matrix",
+                "b": "Column-wise partitioning of the second matrix",
+                "c": "Both A and B",
+                "d": "None of the above"
+            },
+            "explanations": {
+                "a": "Partially correct, but often more is done.",
+                "b": "Partially correct, but often more is done.",
+                "c": "Correct. Various strategies like block partitioning (2D decomposition) are used.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "c",
+            "difficulty": "advanced"
         },
         {
             "question": "What does MPI stand for in the context of parallel computing?",
-            "options": [
-                "Matrix Programming Interface",
-                "Message Passing Interface",
-                "Multi-Processor Integration",
-                "Matrix Processing Instruction"
-            ],
-            "answer": "Message Passing Interface",
-            "level": "advanced"
+            "answers": {
+                "a": "Matrix Programming Interface",
+                "b": "Message Passing Interface",
+                "c": "Multi-Processor Integration",
+                "d": "Matrix Processing Instruction"
+            },
+            "explanations": {
+                "a": "Incorrect.",
+                "b": "Correct. It's a standard for message passing between processes.",
+                "c": "Incorrect.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "b",
+            "difficulty": "advanced"
         }
     ]
 }
