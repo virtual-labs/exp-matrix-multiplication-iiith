@@ -1,5 +1,3 @@
-### Theory
-
 #### Matrix Multiplication
 
 Matrix multiplication is a fundamental operation in linear algebra with wide applications in various fields such as computer graphics, physics, and machine learning. The product of two matrices, A and B, is a third matrix, C, where each element is the result of a dot product of a row from A and a column from B.
