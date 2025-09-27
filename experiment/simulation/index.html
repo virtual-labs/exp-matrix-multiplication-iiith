@@ -23,21 +23,22 @@
             <div class="control-section">
                 <h3>System Configuration</h3>
                 <div class="control-group">
+                    <label>Matrix Size</label>
+                    <select id="matrixSizeSelector">
+                        <option value="4">4×4 Matrix</option>
+                        <option value="6">6×6 Matrix</option>
+                        <option value="8" selected>8×8 Matrix</option>
+                        <option value="16">16×16 Matrix</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
                     <label>Number of Processes</label>
                     <select id="processCountSelector">
                         <option value="2">2 Processes</option>
                         <option value="4" selected>4 Processes</option>
                         <option value="6">6 Processes</option>
                         <option value="8">8 Processes</option>
-                    </select>
-                </div>
-
-                <div class="control-group">
-                    <label>Matrix Size</label>
-                    <select id="matrixSizeSelector">
-                        <option value="4">4×4 Matrix</option>
-                        <option value="6" selected>6×6 Matrix</option>
-                        <option value="8">8×8 Matrix</option>
                     </select>
                 </div>
 
@@ -163,8 +164,8 @@
                 <div class="feature-section">
                     <h3>🔧 System Configuration</h3>
                     <ul>
-                        <li><strong>Number of Processes:</strong> Choose 2, 4, 6, or 8 MPI processes. More processes = better parallelization for larger matrices.</li>
-                        <li><strong>Matrix Size:</strong> Select 4×4, 6×6, or 8×8 matrices. Larger matrices demonstrate parallel efficiency better.</li>
+                        <li><strong>Number of Processes:</strong> Choose from available options based on matrix size. Process count depends on matrix divisibility for optimal load balancing.</li>
+                        <li><strong>Matrix Size:</strong> Select 4×4, 6×6, 8×8, or 16×16 matrices. Each size has specific process count options for perfect row distribution.</li>
                         <li><strong>Matrix Values:</strong>
                             <ul>
                                 <li><em>Random Values:</em> System generates random numbers (0-9) for matrices A and B</li>
@@ -179,6 +180,19 @@
                             </ul>
                         </li>
                     </ul>
+                </div>
+
+                <div class="feature-section">
+                    <h3>⚙️ Process Count Configuration</h3>
+                    <p>Process counts are dynamically limited based on matrix size to ensure perfect load balancing:</p>
+                    <ul>
+                        <li><strong>4×4 Matrix:</strong> 2 or 4 processes (2 or 1 rows per process)</li>
+                        <li><strong>6×6 Matrix:</strong> 2 processes only (3 rows per process)</li>
+                        <li><strong>8×8 Matrix:</strong> 2, 4, or 8 processes (4, 2, or 1 rows per process)</li>
+                        <li><strong>16×16 Matrix:</strong> 2, 4, 8, or 16 processes (8, 4, 2, or 1 rows per process)</li>
+                    </ul>
+                    <p><em>Note: Process count dropdown updates automatically when matrix size changes to show only valid options.</em></p>
+                    <p><strong>Why the divisibility rule?</strong> This simulation uses a simple row-wise decomposition where matrix rows are split evenly among processes. For this to work, the matrix size must be perfectly divisible by the process count. This ensures perfect load balancing, where every process does the same amount of work.</p>
                 </div>
 
                 <div class="feature-section">
@@ -281,14 +295,15 @@
                     <ol>
                         <li><strong>Basic Parallel Execution:</strong>
                             <ul>
-                                <li>Start with 4 processes and 6×6 matrix</li>
+                                <li>Start with 2 processes and 8×8 matrix</li>
                                 <li>Use automatic mode to see full algorithm flow</li>
                                 <li>Observe how work is distributed and collected</li>
                             </ul>
                         </li>
                         <li><strong>Scalability Testing:</strong>
                             <ul>
-                                <li>Run same matrix size with 2, 4, 6, and 8 processes</li>
+                                <li>8×8 matrix: Test with 2, 4, and 8 processes</li>
+                                <li>16×16 matrix: Test with 2, 4, 8, and 16 processes</li>
                                 <li>Compare execution times and efficiency</li>
                                 <li>Find optimal process count for different matrix sizes</li>
                             </ul>

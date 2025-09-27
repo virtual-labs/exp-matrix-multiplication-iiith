@@ -34,3 +34,50 @@ The simulation provides the following controls:
     *   The "Simulation Logs" provide a textual description of the events occurring during the simulation.
     *   The "Performance Comparison" chart (which appears after the simulation) compares the performance of the parallel algorithm with a sequential one.
     *   The "MPI Code Download" section allows you to download the C code implementation of the parallel matrix multiplication algorithm.
+
+#### Detailed Algorithm Execution:
+
+**What Each Process Does During Multiplication:**
+
+**Phase 1 - Data Distribution (Scatter):**
+- **Master Process (Rank 0):**
+  - Initializes matrices A and B with random or user-defined values
+  - Calculates how many rows each process should handle: `rows_per_process = ceiling(matrix_size / num_processes)`
+  - Sends consecutive row blocks of matrix A to worker processes using MPI_Send
+  - Broadcasts the complete matrix B to all processes using MPI_Bcast
+  - Keeps its own assigned rows (typically rows 0 to rows_per_process-1)
+
+- **Worker Processes (Rank 1, 2, 3, ...):**
+  - Receive their assigned row block from the master using MPI_Recv
+  - Receive the complete matrix B via broadcast
+  - Prepare local storage for partial results
+
+**Phase 2 - Parallel Computation:**
+Each process (including master) performs **independent computation**:
+```
+for each assigned row i:
+    for each column j in result matrix:
+        C[i][j] = 0
+        for each element k:
+            C[i][j] += A[i][k] * B[k][j]  // Dot product computation
+```
+
+**Workload Distribution Example (12×12 matrix, 4 processes):**
+- Process 0: Computes rows 0-2 (3 rows)
+- Process 1: Computes rows 3-5 (3 rows)  
+- Process 2: Computes rows 6-8 (3 rows)
+- Process 3: Computes rows 9-11 (3 rows)
+
+**Phase 3 - Result Collection (Gather):**
+- **Worker Processes:** Send their computed row blocks back to master using MPI_Send
+- **Master Process:** 
+  - Collects partial results from all workers using MPI_Recv
+  - Assembles the complete result matrix C by placing each worker's rows in correct positions
+  - Displays final result and performance metrics
+
+**Key Observations to Watch For:**
+- **Color-coded rows** show which process is responsible for which rows
+- **Process states** change from Idle → Computing → Sending/Receiving → Completed  
+- **Matrix cells light up** as calculations complete, showing real-time progress
+- **Communication patterns** are visible during scatter and gather phases
+- **Load balancing** ensures each process gets roughly equal work
