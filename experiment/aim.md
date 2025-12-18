@@ -1,1 +1,1 @@
-### Aim of the experiment
+### To understand the principles of parallel matrix multiplication using the Message Passing Interface (MPI). This experiment demonstrates how a complex computational task can be divided among multiple processes to achieve faster execution times.

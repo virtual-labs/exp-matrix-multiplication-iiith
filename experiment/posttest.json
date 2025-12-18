@@ -1,39 +1,158 @@
 {
-  "version": 2.0,
-  "questions": [
-    {
-      "question": "This is a Sample Question 1?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
-    },
-    {
-      "question": "This is a Sample Question 2?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "c",
-      "difficulty": "beginner"
-    }
-  ]
+    "version": 2.0,
+    "questions": [
+        {
+            "question": "If you multiply a 4x2 matrix by a 2x5 matrix, what are the dimensions of the product?",
+            "answers": {
+                "a": "4x5",
+                "b": "2x2",
+                "c": "5x4",
+                "d": "2x5"
+            },
+            "explanations": {
+                "a": "Correct. The outer dimensions determine the result's dimensions.",
+                "b": "Incorrect.",
+                "c": "Incorrect.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "a",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "Is matrix multiplication commutative (i.e., is AB always equal to BA)?",
+            "answers": {
+                "a": "Yes",
+                "b": "No",
+                "c": "Only if A and B are square matrices",
+                "d": "Only if A and B have the same dimensions"
+            },
+            "explanations": {
+                "a": "Incorrect.",
+                "b": "Correct. In general, AB is not equal to BA.",
+                "c": "Incorrect. Even for square matrices, it's not always commutative.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "b",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "To multiply two matrices, the number of columns in the first matrix must be equal to the number of ____ in the second matrix.",
+            "answers": {
+                "a": "rows",
+                "b": "columns",
+                "c": "elements",
+                "d": "diagonals"
+            },
+            "explanations": {
+                "a": "Correct. This is the fundamental rule for matrix multiplication compatibility.",
+                "b": "Incorrect.",
+                "c": "Incorrect.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "a",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "What is the distributive property of matrix multiplication over addition?",
+            "answers": {
+                "a": "A(B+C) = AB + AC",
+                "b": "A(BC) = (AB)C",
+                "c": "AB = BA",
+                "d": "A+B = B+A"
+            },
+            "explanations": {
+                "a": "Correct. This is the left distributive property.",
+                "b": "Incorrect. This is associativity.",
+                "c": "Incorrect. This is commutativity.",
+                "d": "Incorrect. This is commutativity of addition."
+            },
+            "correctAnswer": "a",
+            "difficulty": "intermediate"
+        },
+        {
+            "question": "Which algorithm is a divide-and-conquer algorithm for matrix multiplication that is faster than the naive O(n^3) algorithm?",
+            "answers": {
+                "a": "Strassen's algorithm",
+                "b": "Dijkstra's algorithm",
+                "c": "Prim's algorithm",
+                "d": "Kruskal's algorithm"
+            },
+            "explanations": {
+                "a": "Correct. Strassen's algorithm has a complexity of about O(n^2.807).",
+                "b": "Incorrect. Dijkstra's is for finding shortest paths.",
+                "c": "Incorrect. Prim's is for minimum spanning trees.",
+                "d": "Incorrect. Kruskal's is for minimum spanning trees."
+            },
+            "correctAnswer": "a",
+            "difficulty": "intermediate"
+        },
+        {
+            "question": "What is the identity matrix for multiplication of 3x3 matrices?",
+            "answers": {
+                "a": "A 3x3 matrix of all 1s",
+                "b": "A 3x3 matrix of all 0s",
+                "c": "A 3x3 matrix with 1s on the diagonal and 0s elsewhere",
+                "d": "A 3x3 matrix with 0s on the diagonal and 1s elsewhere"
+            },
+            "explanations": {
+                "a": "Incorrect.",
+                "b": "Incorrect. This is the zero matrix.",
+                "c": "Correct. This is the definition of an identity matrix.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "c",
+            "difficulty": "intermediate"
+        },
+        {
+            "question": "In the context of this experiment, what is the role of the 'master' process in MPI?",
+            "answers": {
+                "a": "It performs all the computations.",
+                "b": "It distributes the work to worker processes and gathers the results.",
+                "c": "It only stores the final result.",
+                "d": "It is not used in this experiment."
+            },
+            "explanations": {
+                "a": "Incorrect. The work is distributed.",
+                "b": "Correct. This describes the master role in the master-worker model.",
+                "c": "Incorrect. It also manages the process.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "b",
+            "difficulty": "advanced"
+        },
+        {
+            "question": "What does 'scalability' mean in the context of parallel computing?",
+            "answers": {
+                "a": "The ability of a system to handle an increasing amount of work by adding resources.",
+                "b": "The speed of a single processor.",
+                "c": "The total memory of the system.",
+                "d": "The number of programming languages supported."
+            },
+            "explanations": {
+                "a": "Correct. Scalability is about handling more work by adding more resources like processors.",
+                "b": "Incorrect.",
+                "c": "Incorrect.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "a",
+            "difficulty": "advanced"
+        },
+        {
+            "question": "What is a potential bottleneck in parallel matrix multiplication?",
+            "answers": {
+                "a": "Data distribution and collection overhead",
+                "b": "Processor speed",
+                "c": "Matrix size",
+                "d": "All of the above"
+            },
+            "explanations": {
+                "a": "Correct, communication overhead can be a significant bottleneck.",
+                "b": "Correct, processor speed is always a factor.",
+                "c": "Correct, larger matrices require more computation and memory.",
+                "d": "Correct. All these factors can be bottlenecks."
+            },
+            "correctAnswer": "d",
+            "difficulty": "advanced"
+        }
+    ]
 }

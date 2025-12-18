@@ -1,39 +1,158 @@
 {
-  "version": 2.0,
-  "questions": [
-    {
-      "question": "This is a Sample Question 1?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
-    },
-    {
-      "question": "This is a Sample Question 2?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "c",
-      "difficulty": "beginner"
-    }
-  ]
+    "version": 2.0,
+    "questions": [
+        {
+            "question": "What is the dimension of the resulting matrix when a 2x3 matrix is multiplied by a 3x4 matrix?",
+            "answers": {
+                "a": "2x4",
+                "b": "3x3",
+                "c": "4x2",
+                "d": "3x4"
+            },
+            "explanations": {
+                "a": "Correct. The resulting matrix has the number of rows of the first matrix and the number of columns of the second matrix.",
+                "b": "Incorrect.",
+                "c": "Incorrect.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "a",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "Which of the following is a necessary condition for matrix multiplication AB to be defined?",
+            "answers": {
+                "a": "The number of rows in A must equal the number of columns in B.",
+                "b": "The number of columns in A must equal the number of rows in B.",
+                "c": "A and B must be square matrices.",
+                "d": "A and B must have the same dimensions."
+            },
+            "explanations": {
+                "a": "Incorrect.",
+                "b": "Correct. The inner dimensions must match.",
+                "c": "Incorrect.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "b",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "If A is a 3x2 matrix and B is a 2x1 matrix, what are the dimensions of A*B?",
+            "answers": {
+                "a": "3x1",
+                "b": "1x3",
+                "c": "2x2",
+                "d": "3x2"
+            },
+            "explanations": {
+                "a": "Correct. The resulting matrix has dimensions 3x1.",
+                "b": "Incorrect.",
+                "c": "Incorrect.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "a",
+            "difficulty": "beginner"
+        },
+        {
+            "question": "Matrix multiplication is associative. What does this mean?",
+            "answers": {
+                "a": "A(BC) = (AB)C",
+                "b": "AB = BA",
+                "c": "A(B+C) = AB+AC",
+                "d": "A+B = B+A"
+            },
+            "explanations": {
+                "a": "Correct. This is the definition of associativity.",
+                "b": "Incorrect. This is commutativity, which doesn't hold for matrix multiplication.",
+                "c": "Incorrect. This is distributivity.",
+                "d": "Incorrect. This is commutativity of addition."
+            },
+            "correctAnswer": "a",
+            "difficulty": "intermediate"
+        },
+        {
+            "question": "What is the time complexity of the naive matrix multiplication algorithm for two n x n matrices?",
+            "answers": {
+                "a": "O(n)",
+                "b": "O(n^2)",
+                "c": "O(n^3)",
+                "d": "O(log n)"
+            },
+            "explanations": {
+                "a": "Incorrect.",
+                "b": "Incorrect.",
+                "c": "Correct. It involves three nested loops.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "c",
+            "difficulty": "intermediate"
+        },
+        {
+            "question": "Which of the following is NOT a property of matrix multiplication?",
+            "answers": {
+                "a": "Associativity",
+                "b": "Distributivity",
+                "c": "Commutativity",
+                "d": "Identity Property"
+            },
+            "explanations": {
+                "a": "Incorrect. Matrix multiplication is associative.",
+                "b": "Incorrect. Matrix multiplication is distributive over addition.",
+                "c": "Correct. Matrix multiplication is generally not commutative (AB != BA).",
+                "d": "Incorrect. There is an identity matrix for multiplication."
+            },
+            "correctAnswer": "c",
+            "difficulty": "intermediate"
+        },
+        {
+            "question": "What is the main advantage of using parallel algorithms for matrix multiplication?",
+            "answers": {
+                "a": "Reduced complexity",
+                "b": "Increased accuracy",
+                "c": "Faster computation time",
+                "d": "Simpler implementation"
+            },
+            "explanations": {
+                "a": "Incorrect. The algorithmic complexity doesn't change, but the execution time does.",
+                "b": "Incorrect. Accuracy is not the primary goal.",
+                "c": "Correct. Parallelism is used to reduce the wall-clock time.",
+                "d": "Incorrect. Parallel implementations are often more complex."
+            },
+            "correctAnswer": "c",
+            "difficulty": "advanced"
+        },
+        {
+            "question": "In a distributed memory system, what is a common strategy for partitioning data for parallel matrix multiplication?",
+            "answers": {
+                "a": "Row-wise partitioning of the first matrix",
+                "b": "Column-wise partitioning of the second matrix",
+                "c": "Both A and B",
+                "d": "None of the above"
+            },
+            "explanations": {
+                "a": "Partially correct, but often more is done.",
+                "b": "Partially correct, but often more is done.",
+                "c": "Correct. Various strategies like block partitioning (2D decomposition) are used.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "c",
+            "difficulty": "advanced"
+        },
+        {
+            "question": "What does MPI stand for in the context of parallel computing?",
+            "answers": {
+                "a": "Matrix Programming Interface",
+                "b": "Message Passing Interface",
+                "c": "Multi-Processor Integration",
+                "d": "Matrix Processing Instruction"
+            },
+            "explanations": {
+                "a": "Incorrect.",
+                "b": "Correct. It's a standard for message passing between processes.",
+                "c": "Incorrect.",
+                "d": "Incorrect."
+            },
+            "correctAnswer": "b",
+            "difficulty": "advanced"
+        }
+    ]
 }

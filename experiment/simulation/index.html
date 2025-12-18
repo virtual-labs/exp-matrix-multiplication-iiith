@@ -1,13 +1,374 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPI Matrix Multiplication Lab</title>
+    <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
-		<!-- Your code goes here-->
+    <div class="app-container">
+        <header class="header">
+            <h1>
+                🧮 MPI Matrix Multiplication Lab
+                <div class="status-indicator"></div>
+            </h1>
+            <div style="font-size: 0.9em; opacity: 0.9;">
+                Parallel Computing Simulation
+            </div>
+        </header>
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+        <div class="controls-panel">
+            <div class="control-section">
+                <h3>System Configuration</h3>
+                <div class="control-group">
+                    <label>Matrix Size</label>
+                    <select id="matrixSizeSelector">
+                        <option value="4">4×4 Matrix</option>
+                        <option value="6">6×6 Matrix</option>
+                        <option value="8" selected>8×8 Matrix</option>
+                        <option value="16">16×16 Matrix</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>Number of Processes</label>
+                    <select id="processCountSelector">
+                        <option value="2">2 Processes</option>
+                        <option value="4" selected>4 Processes</option>
+                        <option value="6">6 Processes</option>
+                        <option value="8">8 Processes</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>Matrix Values</label>
+                    <select id="matrixMode">
+                        <option value="random" selected>Random Values</option>
+                        <option value="manual">Manual Edit</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>Animation Speed</label>
+                    <input type="range" id="speedSlider" min="0.25" max="3" step="0.25" value="1" class="speed-slider">
+                    <div class="speed-display">Speed: <span id="speedValue">1.0x</span></div>
+                </div>
+
+                <div class="control-group">
+                    <label>Execution Mode</label>
+                    <select id="executionMode">
+                        <option value="auto" selected>Automatic</option>
+                        <option value="step">Step-by-Step</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>Simulation Control</h3>
+                <button class="btn btn-primary" id="startBtn">
+                    🚀 Start Simulation
+                </button>
+
+                <button class="btn btn-secondary" id="stepBtn" style="display: none;">
+                    ➡️ Next Step
+                </button>
+                
+                <button class="btn btn-secondary" id="randomizeBtn" style="display: none;">
+                    🎲 Randomize Matrices
+                </button>
+            </div>
+        </div>
+
+        <div class="experiment-area">
+            <div class="simulation-area">
+                <button class="info-button" onclick="toggleInfoModal()" title="Click for feature guide">
+                    ℹ️
+                </button>
+                <div class="process-grid" id="processGrid"></div>
+                
+                <div class="matrix-display">
+                    <div style="font-weight: 600; margin-bottom: 20px; color: #2d3748;">Matrix Multiplication: A × B = C</div>
+                    <div class="matrix-row">
+                        <div id="matrixA" class="matrix"></div>
+                        <div class="matrix-operator">×</div>
+                        <div id="matrixB" class="matrix"></div>
+                        <div class="matrix-operator">=</div>
+                        <div id="matrixC" class="matrix"></div>
+                    </div>
+                </div>
+
+                <div id="performanceComparison"></div>
+            </div>
+        </div>
+
+        <div class="observations-panel">
+            <div class="status-section">
+                <h4>Simulation Logs</h4>
+                <div class="logs-container" id="logsContainer">
+                    <div class="log-entry">
+                        <span class="log-time">00:00:00</span>
+                        <span class="log-message">System initialized and ready</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="status-section">
+                <h4>MPI Code Download</h4>
+                <div class="code-download-card">
+                    <div class="download-description">
+                        Download complete MPI implementation for matrix multiplication
+                    </div>
+                    <button id="downloadMPICode" class="download-btn">
+                        <span class="download-icon">📁</span>
+                        Download MPI Code
+                    </button>
+                </div>
+            </div>
+
+            <div class="status-section">
+                <h4>Configuration</h4>
+                <div class="stat-card">
+                    <div class="stat-value" id="displayProcessCount">4</div>
+                    <div class="stat-label">MPI Processes</div>
+                    <div class="stat-description">Number of parallel processes</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-value" id="displayMatrixSize">0×0</div>
+                    <div class="stat-label">Matrix Size</div>
+                    <div class="stat-description">Current matrix dimensions</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Mobile Portrait Orientation Overlay -->
+    <div class="rotate-device-overlay">
+        <div class="rotate-icon">📱➡️📲</div>
+        <h2>Please Rotate Your Device</h2>
+        <p>For the best experience, please rotate your device to landscape mode to view this MPI matrix multiplication simulation.</p>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="info-modal" onclick="closeInfoModal(event)">
+        <div class="info-modal-content" onclick="event.stopPropagation()">
+            <div class="info-modal-header">
+                <h2>🧮 MPI Matrix Multiplication Guide</h2>
+                <button class="close-button" onclick="closeInfoModal()">&times;</button>
+            </div>
+            <div class="info-modal-body">
+                <div class="feature-section">
+                    <h3>🔧 System Configuration</h3>
+                    <ul>
+                        <li><strong>Number of Processes:</strong> Choose from available options based on matrix size. Process count depends on matrix divisibility for optimal load balancing.</li>
+                        <li><strong>Matrix Size:</strong> Select 4×4, 6×6, 8×8, or 16×16 matrices. Each size has specific process count options for perfect row distribution.</li>
+                        <li><strong>Matrix Values:</strong>
+                            <ul>
+                                <li><em>Random Values:</em> System generates random numbers (0-9) for matrices A and B</li>
+                                <li><em>Manual Edit:</em> Click on matrix cells to edit values manually for testing</li>
+                            </ul>
+                        </li>
+                        <li><strong>Animation Speed:</strong> Control visualization speed (0.25x to 3x) to match your learning pace.</li>
+                        <li><strong>Execution Mode:</strong>
+                            <ul>
+                                <li><em>Automatic:</em> Watch the complete parallel algorithm execution</li>
+                                <li><em>Step-by-Step:</em> Manually progress through each phase of the algorithm</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="feature-section">
+                    <h3>⚙️ Process Count Configuration</h3>
+                    <p>Process counts are dynamically limited based on matrix size to ensure perfect load balancing:</p>
+                    <ul>
+                        <li><strong>4×4 Matrix:</strong> 2 or 4 processes (2 or 1 rows per process)</li>
+                        <li><strong>6×6 Matrix:</strong> 2 processes only (3 rows per process)</li>
+                        <li><strong>8×8 Matrix:</strong> 2, 4, or 8 processes (4, 2, or 1 rows per process)</li>
+                        <li><strong>16×16 Matrix:</strong> 2, 4, 8, or 16 processes (8, 4, 2, or 1 rows per process)</li>
+                    </ul>
+                    <p><em>Note: Process count dropdown updates automatically when matrix size changes to show only valid options.</em></p>
+                    <p><strong>Why the divisibility rule?</strong> This simulation uses a simple row-wise decomposition where matrix rows are split evenly among processes. For this to work, the matrix size must be perfectly divisible by the process count. This ensures perfect load balancing, where every process does the same amount of work.</p>
+                </div>
+
+                <div class="feature-section">
+                    <h3>📊 MPI Matrix Multiplication Algorithm</h3>
+                    <ol>
+                        <li><strong>Phase 1 - Data Distribution (Scatter):</strong>
+                            <ul>
+                                <li>Master process (rank 0) divides matrix A into row blocks</li>
+                                <li>Each worker process receives assigned rows + complete matrix B</li>
+                                <li>Row distribution shown by color coding on matrices</li>
+                            </ul>
+                        </li>
+                        <li><strong>Phase 2 - Parallel Computation:</strong>
+                            <ul>
+                                <li>Each process computes its assigned rows of result matrix C</li>
+                                <li>Processes work independently and simultaneously</li>
+                                <li>Matrix cells light up as calculations complete</li>
+                            </ul>
+                        </li>
+                        <li><strong>Phase 3 - Result Collection (Gather):</strong>
+                            <ul>
+                                <li>Master process collects computed row blocks from all workers</li>
+                                <li>Final result matrix C is assembled and displayed</li>
+                                <li>Performance comparison shows parallel vs sequential timing</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="feature-section">
+                    <h3>🎮 Using the Simulation</h3>
+                    <ul>
+                        <li><strong>Basic Workflow:</strong>
+                            <ol>
+                                <li>Configure processes and matrix size</li>
+                                <li>Choose random or manual matrix values</li>
+                                <li>Select automatic or step-by-step mode</li>
+                                <li>Click "Start Simulation" to begin</li>
+                            </ol>
+                        </li>
+                        <li><strong>Manual Matrix Editing:</strong>
+                            <ul>
+                                <li>Switch to "Manual Edit" mode</li>
+                                <li>Click any cell in matrices A or B to edit values</li>
+                                <li>Use "Randomize Matrices" to generate new random values</li>
+                            </ul>
+                        </li>
+                        <li><strong>Step-by-Step Mode:</strong>
+                            <ul>
+                                <li>Click "Next Step" to progress through each phase</li>
+                                <li>Read detailed logs for each operation</li>
+                                <li>Perfect for understanding the algorithm step-by-step</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="feature-section">
+                    <h3>📈 Understanding the Visualization</h3>
+                    <ul>
+                        <li><strong>Process Grid:</strong> Shows all MPI processes with their current status and assigned work</li>
+                        <li><strong>Process Colors:</strong> Each process has a unique color that matches its assigned matrix rows</li>
+                        <li><strong>Matrix Color Coding:</strong> Rows in matrices are colored to show which process handles them</li>
+                        <li><strong>Process States:</strong>
+                            <ul>
+                                <li><em>Idle:</em> Process waiting for work assignment</li>
+                                <li><em>Computing:</em> Process actively calculating matrix operations</li>
+                                <li><em>Communicating:</em> Process sending/receiving data</li>
+                                <li><em>Completed:</em> Process finished its assigned work</li>
+                            </ul>
+                        </li>
+                        <li><strong>Matrix Cell Animation:</strong> Cells light up as calculations complete, showing real-time progress</li>
+                    </ul>
+                </div>
+
+                <div class="feature-section">
+                    <h3>🚀 Parallel Computing Concepts</h3>
+                    <ul>
+                        <li><strong>Data Parallelism:</strong> Same operation (matrix multiplication) applied to different data chunks</li>
+                        <li><strong>Load Balancing:</strong> Work distributed evenly among processes (rows per process ≈ matrix_size / num_processes)</li>
+                        <li><strong>Communication Overhead:</strong> Time spent sending/receiving data between processes</li>
+                        <li><strong>Scalability:</strong> Performance improvement with more processes (ideally linear speedup)</li>
+                        <li><strong>Master-Worker Pattern:</strong> Rank 0 coordinates work distribution and result collection</li>
+                    </ul>
+                </div>
+
+                <div class="feature-section">
+                    <h3>📊 Performance Analysis</h3>
+                    <ul>
+                        <li><strong>Speedup:</strong> How much faster parallel execution is compared to sequential</li>
+                        <li><strong>Efficiency:</strong> How well the parallel algorithm uses available processors</li>
+                        <li><strong>Communication vs Computation:</strong> Ratio of time spent communicating vs calculating</li>
+                        <li><strong>Optimal Process Count:</strong> Point where adding more processes doesn't improve performance</li>
+                        <li><strong>Matrix Size Impact:</strong> Larger matrices typically show better parallel efficiency</li>
+                    </ul>
+                </div>
+
+                <div class="feature-section">
+                    <h3>🎯 Recommended Experiments</h3>
+                    <ol>
+                        <li><strong>Basic Parallel Execution:</strong>
+                            <ul>
+                                <li>Start with 2 processes and 8×8 matrix</li>
+                                <li>Use automatic mode to see full algorithm flow</li>
+                                <li>Observe how work is distributed and collected</li>
+                            </ul>
+                        </li>
+                        <li><strong>Scalability Testing:</strong>
+                            <ul>
+                                <li>8×8 matrix: Test with 2, 4, and 8 processes</li>
+                                <li>16×16 matrix: Test with 2, 4, 8, and 16 processes</li>
+                                <li>Compare execution times and efficiency</li>
+                                <li>Find optimal process count for different matrix sizes</li>
+                            </ul>
+                        </li>
+                        <li><strong>Matrix Size Impact:</strong>
+                            <ul>
+                                <li>Use fixed process count (4) with different matrix sizes</li>
+                                <li>Observe how parallel efficiency changes with problem size</li>
+                                <li>Larger matrices should show better speedup</li>
+                            </ul>
+                        </li>
+                        <li><strong>Algorithm Understanding:</strong>
+                            <ul>
+                                <li>Use step-by-step mode with manual matrix values</li>
+                                <li>Create simple test cases (like identity matrix)</li>
+                                <li>Verify results and understand each phase</li>
+                            </ul>
+                        </li>
+                        <li><strong>Communication Analysis:</strong>
+                            <ul>
+                                <li>Use slow animation speed to observe communication patterns</li>
+                                <li>Compare communication overhead with different process counts</li>
+                                <li>Understand when communication becomes a bottleneck</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="feature-section">
+                    <h3>💾 MPI Code Download</h3>
+                    <ul>
+                        <li><strong>Complete Implementation:</strong> Download working MPI C code for matrix multiplication</li>
+                        <li><strong>Ready to Compile:</strong> Includes all necessary MPI functions and proper error handling</li>
+                        <li><strong>Educational Comments:</strong> Detailed explanations of each code section</li>
+                        <li><strong>Compilation Instructions:</strong> How to compile and run with mpicc and mpirun</li>
+                        <li><strong>Performance Measurements:</strong> Built-in timing functions to measure speedup</li>
+                    </ul>
+                </div>
+
+                <div class="feature-section">
+                    <h3>🔍 Key Observations</h3>
+                    <ul>
+                        <li><strong>Load Distribution:</strong> Notice how rows are divided among processes (shown by colors)</li>
+                        <li><strong>Parallel Efficiency:</strong> More processes don't always mean faster execution (overhead matters)</li>
+                        <li><strong>Communication Patterns:</strong> Master-worker communication in scatter and gather phases</li>
+                        <li><strong>Synchronization:</strong> All processes must complete before final result assembly</li>
+                        <li><strong>Matrix Properties:</strong> Multiplication requires A rows × B columns operations</li>
+                        <li><strong>Memory Distribution:</strong> Each process needs its assigned A rows + complete matrix B</li>
+                    </ul>
+                </div>
+
+                <div class="feature-section">
+                    <h3>❓ Common Questions</h3>
+                    <ul>
+                        <li><strong>Q: Why use more processes than CPU cores?</strong> A: Educational purposes - shows communication overhead effects</li>
+                        <li><strong>Q: Why do cells light up at different times?</strong> A: Visualizes parallel computation happening simultaneously</li>
+                        <li><strong>Q: What if processes > matrix rows?</strong> A: Some processes remain idle (realistic scenario)</li>
+                        <li><strong>Q: Why is sequential sometimes faster?</strong> A: Small matrices have high communication-to-computation ratio</li>
+                        <li><strong>Q: How does this relate to real HPC?</strong> A: Same principles apply to supercomputers with thousands of cores</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

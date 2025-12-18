@@ -1,1 +1,1 @@
-## Experiment name
+## MPI Matrix Multiplication
