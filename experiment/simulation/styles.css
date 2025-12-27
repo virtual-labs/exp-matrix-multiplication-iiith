@@ -9,14 +9,15 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: #1a202c;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         .app-container {
             display: grid;
             grid-template-columns: 320px 1fr 350px;
             grid-template-rows: 80px 1fr;
-            height: 100vh;
+            min-height: 100vh;
             max-width: 1800px;
             margin: 0 auto;
             gap: 15px;
@@ -25,7 +26,7 @@
             backdrop-filter: blur(10px);
             border-radius: 20px;
             box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            overflow: hidden;
+            overflow: visible;
         }
 
         .header {
@@ -67,7 +68,6 @@
             padding: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             overflow-y: auto;
-            height: calc(100vh - 110px);
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -95,8 +95,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
-            height: calc(100vh - 110px);
-            max-height: calc(100vh - 110px);
+            min-height: 400px;
         }
 
         .info-button {
@@ -293,7 +292,6 @@
             padding: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             overflow-y: auto;
-            height: calc(100vh - 110px);
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -856,55 +854,35 @@
 
         @media (max-width: 1200px) {
             .app-container {
-                grid-template-columns: 1fr;
-                grid-template-rows: 80px 1fr auto auto;
-                height: 100vh;
-                gap: 10px;
-                padding: 10px;
-            }
-            
-            .controls-panel {
-                height: 300px;
-                order: 2;
-            }
-            
-            .experiment-area {
-                order: 1;
-                min-height: 400px;
-            }
-            
-            .observations-panel {
-                height: 250px;
-                order: 3;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.5em;
-            }
-            
-            .control-group {
+                grid-template-columns: 280px 1fr 300px;
+                gap: 12px;
                 padding: 12px;
             }
             
-            .btn {
-                padding: 8px 12px;
-                font-size: 12px;
+            .header h1 {
+                font-size: 1.6em;
+            }
+            
+            .matrix-cell {
+                width: 30px;
+                height: 30px;
+                font-size: 0.85rem;
             }
         }
         
-        /* Mobile Landscape Support - Desktop-like Experience */
-        @media screen and (max-width: 968px) and (orientation: landscape) {
+        /* Tablet Portrait & Small Laptops */
+        @media (max-width: 1024px) {
             .app-container {
-                grid-template-columns: 280px 1fr 300px;
-                grid-template-rows: 60px 1fr;
-                gap: 10px;
-                padding: 10px;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto auto auto;
+                min-height: auto;
+                gap: 12px;
+                padding: 12px;
             }
             
             .header {
-                padding: 0 15px;
+                grid-column: 1 / -1;
+                padding: 15px 20px;
             }
             
             .header h1 {
@@ -912,28 +890,282 @@
             }
             
             .controls-panel {
-                padding: 15px;
-                height: calc(100vh - 80px);
+                grid-column: 1;
+                grid-row: 2;
             }
             
             .observations-panel {
+                grid-column: 2;
+                grid-row: 2;
+            }
+            
+            .experiment-area {
+                grid-column: 1 / -1;
+                grid-row: 3;
+                min-height: 450px;
+            }
+            
+            .matrix-cell {
+                width: 28px;
+                height: 28px;
+                font-size: 0.8rem;
+            }
+            
+            .matrix-operator {
+                font-size: 1.2rem;
+                margin: 0 8px;
+            }
+        }
+        
+        /* Tablet Portrait */
+        @media (max-width: 768px) {
+            .app-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto auto;
+                gap: 10px;
+                padding: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                grid-column: 1;
+                padding: 12px 15px;
+                border-radius: 12px;
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+            
+            .header h1 {
+                font-size: 1.3em;
+            }
+            
+            .controls-panel {
+                grid-column: 1;
+                grid-row: 2;
                 padding: 15px;
-                height: calc(100vh - 80px);
+            }
+            
+            .experiment-area {
+                grid-column: 1;
+                grid-row: 3;
+                min-height: 400px;
+            }
+            
+            .observations-panel {
+                grid-column: 1;
+                grid-row: 4;
+                padding: 15px;
             }
             
             .control-section {
                 padding: 15px;
-                margin-bottom: 15px;
             }
             
             .control-section h3 {
                 font-size: 1em;
-                margin-bottom: 12px;
             }
             
             .control-group {
                 padding: 12px;
-                margin-bottom: 12px;
+                margin-bottom: 15px;
+            }
+            
+            .control-group label {
+                font-size: 0.85rem;
+            }
+            
+            .control-group select {
+                padding: 10px 14px;
+                font-size: 0.9rem;
+            }
+            
+            .btn {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+            
+            .simulation-area {
+                padding: 15px;
+            }
+            
+            .process-grid {
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            
+            .process-node {
+                padding: 12px;
+                border-radius: 12px;
+            }
+            
+            .process-id {
+                font-size: 0.9rem;
+            }
+            
+            .process-status {
+                font-size: 0.75rem;
+            }
+            
+            .process-data {
+                font-size: 0.7rem;
+            }
+            
+            .matrix-display {
+                margin: 15px 0;
+                min-height: auto;
+                padding: 15px 0;
+            }
+            
+            .matrix-display > div:first-child {
+                font-size: 0.9rem !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .matrix-row {
+                gap: 10px;
+                margin: 15px 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .matrix {
+                padding: 10px;
+                gap: 2px;
+            }
+            
+            .matrix-cell {
+                width: 26px;
+                height: 26px;
+                font-size: 0.75rem;
+                border-radius: 4px;
+            }
+            
+            .matrix-operator {
+                font-size: 1.1rem;
+                margin: 0 6px;
+            }
+            
+            .status-section {
+                padding: 12px;
+            }
+            
+            .status-section h4 {
+                font-size: 0.95em;
+            }
+            
+            .stat-card {
+                padding: 15px;
+            }
+            
+            .stat-value {
+                font-size: 1.5rem;
+            }
+            
+            .stat-label {
+                font-size: 0.85rem;
+            }
+            
+            .logs-container {
+                max-height: 150px;
+                padding: 12px;
+            }
+            
+            .log-entry {
+                font-size: 0.75rem;
+            }
+            
+            .log-time {
+                min-width: 60px;
+                font-size: 0.7rem;
+            }
+            
+            .info-button {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .info-modal-content {
+                width: 95%;
+                max-height: 85vh;
+                border-radius: 15px;
+            }
+            
+            .info-modal-header {
+                padding: 15px 20px;
+            }
+            
+            .info-modal-header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .feature-section {
+                padding: 15px 20px;
+            }
+            
+            .feature-section h3 {
+                font-size: 1.1rem;
+            }
+            
+            .feature-section li {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Mobile Portrait - Small Phones */
+        @media (max-width: 480px) {
+            body {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            
+            .app-container {
+                gap: 8px;
+                padding: 8px;
+                border-radius: 12px;
+            }
+            
+            .header {
+                padding: 10px 12px;
+                border-radius: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.1em;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header .status-indicator {
+                width: 10px;
+                height: 10px;
+            }
+            
+            .header > div:last-child {
+                font-size: 0.75em !important;
+            }
+            
+            .controls-panel {
+                padding: 12px;
+                gap: 12px;
+            }
+            
+            .control-section {
+                padding: 12px;
+                border-radius: 10px;
+            }
+            
+            .control-section h3 {
+                font-size: 0.95em;
+                margin-bottom: 10px;
+            }
+            
+            .control-group {
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 8px;
             }
             
             .control-group label {
@@ -943,17 +1175,12 @@
             
             .control-group select {
                 padding: 10px 12px;
-                font-size: 0.8rem;
-            }
-            
-            .btn {
-                padding: 10px 14px;
-                font-size: 0.8rem;
-                margin-bottom: 6px;
+                font-size: 0.85rem;
+                border-radius: 6px;
             }
             
             .speed-slider {
-                height: 6px;
+                height: 5px;
             }
             
             .speed-slider::-webkit-slider-thumb {
@@ -965,76 +1192,86 @@
                 font-size: 0.75rem;
             }
             
+            .btn {
+                padding: 10px 14px;
+                font-size: 0.8rem;
+                border-radius: 6px;
+            }
+            
             .experiment-area {
-                padding: 0;
-                height: calc(100vh - 80px);
-                max-height: calc(100vh - 80px);
+                border-radius: 12px;
+                min-height: 350px;
             }
             
             .simulation-area {
-                padding: 15px;
+                padding: 12px;
             }
             
             .process-grid {
-                gap: 10px;
+                gap: 8px;
                 margin-bottom: 15px;
             }
             
             .process-node {
-                padding: 12px;
+                padding: 10px;
+                border-radius: 10px;
             }
             
             .process-id {
-                font-size: 0.9rem;
-                margin-bottom: 4px;
+                font-size: 0.85rem;
+                margin-bottom: 3px;
             }
             
             .process-status {
-                font-size: 0.75rem;
-                margin-bottom: 2px;
-            }
-            
-            .process-data {
                 font-size: 0.7rem;
             }
             
-            /* Matrix display optimization for mobile landscape */
+            .process-data {
+                font-size: 0.65rem;
+            }
+            
             .matrix-display {
-                margin: 15px 0;
-                min-height: 200px;
-                padding: 15px 0;
+                margin: 12px 0;
+                padding: 10px 0;
             }
             
             .matrix-display > div:first-child {
-                font-size: 0.9rem !important;
-                margin-bottom: 15px !important;
+                font-size: 0.85rem !important;
+                margin-bottom: 12px !important;
             }
             
             .matrix-row {
-                gap: 8px;
-                margin: 15px 0;
+                gap: 6px;
+                margin: 10px 0;
             }
             
             .matrix {
-                padding: 10px;
+                padding: 8px;
                 gap: 1px;
+                border-radius: 8px;
             }
             
             .matrix-cell {
-                width: 28px;
-                height: 28px;
-                font-size: 0.8rem;
+                width: 22px;
+                height: 22px;
+                font-size: 0.65rem;
+                border-radius: 3px;
                 border-width: 1px;
             }
             
             .matrix-operator {
-                font-size: 1.2rem;
-                margin: 0 5px;
+                font-size: 1rem;
+                margin: 0 4px;
+            }
+            
+            .observations-panel {
+                padding: 12px;
+                gap: 10px;
             }
             
             .status-section {
-                padding: 12px;
-                margin-bottom: 12px;
+                padding: 10px;
+                border-radius: 10px;
             }
             
             .status-section h4 {
@@ -1044,122 +1281,456 @@
             
             .stat-card {
                 padding: 12px;
-                margin-bottom: 12px;
+                border-radius: 10px;
+                margin-bottom: 10px;
             }
             
             .stat-value {
-                font-size: 1.2rem;
-                margin-bottom: 4px;
+                font-size: 1.3rem;
             }
             
             .stat-label {
-                font-size: 0.75rem;
+                font-size: 0.8rem;
             }
             
             .stat-description {
                 font-size: 0.7rem;
-                margin-top: 2px;
             }
             
             .code-download-card {
                 padding: 15px;
+                border-radius: 10px;
             }
             
             .download-description {
                 font-size: 0.8rem;
-                margin-bottom: 12px;
+                margin-bottom: 10px;
             }
             
             .download-btn {
-                padding: 10px 14px;
-                font-size: 0.8rem;
+                padding: 10px 16px;
+                font-size: 0.85rem;
+                border-radius: 6px;
             }
             
             .logs-container {
-                height: 200px;
-                font-size: 0.75rem;
-                padding: 12px;
+                max-height: 120px;
+                padding: 10px;
+                border-radius: 6px;
             }
             
             .log-entry {
-                padding: 6px 8px;
-                margin-bottom: 4px;
-                font-size: 0.75rem;
+                font-size: 0.7rem;
+                margin-bottom: 6px;
             }
             
             .log-time {
+                min-width: 55px;
+                font-size: 0.65rem;
+            }
+            
+            .info-button {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+                top: 8px;
+                right: 8px;
+            }
+            
+            .info-modal-content {
+                width: 98%;
+                max-height: 90vh;
+                border-radius: 12px;
+            }
+            
+            .info-modal-header {
+                padding: 12px 15px;
+            }
+            
+            .info-modal-header h2 {
+                font-size: 1rem;
+            }
+            
+            .close-button {
+                width: 28px;
+                height: 28px;
+                font-size: 20px;
+            }
+            
+            .info-modal-body {
+                max-height: calc(90vh - 60px);
+            }
+            
+            .feature-section {
+                padding: 12px 15px;
+            }
+            
+            .feature-section h3 {
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+            
+            .feature-section li {
+                font-size: 0.85rem;
+                margin: 6px 0;
+            }
+            
+            .feature-section ul,
+            .feature-section ol {
+                padding-left: 15px;
+            }
+            
+            .feature-section ul ul {
+                padding-left: 12px;
+            }
+            
+            .feature-section ul ul li {
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Very Small Phones */
+        @media (max-width: 360px) {
+            .header h1 {
+                font-size: 1em;
+            }
+            
+            .matrix-cell {
+                width: 18px;
+                height: 18px;
+                font-size: 0.6rem;
+            }
+            
+            .matrix {
+                padding: 6px;
+            }
+            
+            .matrix-operator {
+                font-size: 0.9rem;
+                margin: 0 3px;
+            }
+            
+            .process-node {
+                padding: 8px;
+            }
+            
+            .process-id {
+                font-size: 0.8rem;
+            }
+            
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.75rem;
+            }
+        }
+        
+        /* Mobile Landscape Support - Desktop-like Experience */
+        @media screen and (max-width: 968px) and (orientation: landscape) {
+            body {
+                overflow-y: auto;
+            }
+            
+            .app-container {
+                grid-template-columns: 250px 1fr 280px;
+                grid-template-rows: 55px 1fr;
+                gap: 8px;
+                padding: 8px;
+                min-height: 100vh;
+            }
+            
+            .header {
+                padding: 0 12px;
+            }
+            
+            .header h1 {
+                font-size: 1.2em;
+            }
+            
+            .controls-panel {
+                padding: 12px;
+            }
+            
+            .observations-panel {
+                padding: 12px;
+            }
+            
+            .control-section {
+                padding: 12px;
+                margin-bottom: 10px;
+            }
+            
+            .control-section h3 {
+                font-size: 0.9em;
+                margin-bottom: 10px;
+            }
+            
+            .control-group {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+            
+            .control-group label {
+                font-size: 0.75rem;
+                margin-bottom: 5px;
+            }
+            
+            .control-group select {
+                padding: 8px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.75rem;
+                margin-bottom: 5px;
+            }
+            
+            .speed-slider {
+                height: 5px;
+            }
+            
+            .speed-slider::-webkit-slider-thumb {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .speed-display {
                 font-size: 0.7rem;
             }
             
-            .log-message {
+            .experiment-area {
+                padding: 0;
+                min-height: 300px;
+            }
+            
+            .simulation-area {
+                padding: 12px;
+            }
+            
+            .process-grid {
+                gap: 8px;
+                margin-bottom: 12px;
+            }
+            
+            .process-node {
+                padding: 10px;
+            }
+            
+            .process-id {
+                font-size: 0.85rem;
+                margin-bottom: 3px;
+            }
+            
+            .process-status {
+                font-size: 0.7rem;
+                margin-bottom: 2px;
+            }
+            
+            .process-data {
+                font-size: 0.65rem;
+            }
+            
+            /* Matrix display optimization for mobile landscape */
+            .matrix-display {
+                margin: 12px 0;
+                min-height: 180px;
+                padding: 10px 0;
+            }
+            
+            .matrix-display > div:first-child {
+                font-size: 0.85rem !important;
+                margin-bottom: 12px !important;
+            }
+            
+            .matrix-row {
+                gap: 6px;
+                margin: 10px 0;
+            }
+            
+            .matrix {
+                padding: 8px;
+                gap: 1px;
+            }
+            
+            .matrix-cell {
+                width: 24px;
+                height: 24px;
+                font-size: 0.7rem;
+                border-width: 1px;
+            }
+            
+            .matrix-operator {
+                font-size: 1rem;
+                margin: 0 4px;
+            }
+            
+            .status-section {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+            
+            .status-section h4 {
+                font-size: 0.85em;
+                margin-bottom: 8px;
+            }
+            
+            .stat-card {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+            
+            .stat-value {
+                font-size: 1.1rem;
+                margin-bottom: 3px;
+            }
+            
+            .stat-label {
+                font-size: 0.7rem;
+            }
+            
+            .stat-description {
+                font-size: 0.65rem;
+                margin-top: 2px;
+            }
+            
+            .code-download-card {
+                padding: 12px;
+            }
+            
+            .download-description {
                 font-size: 0.75rem;
+                margin-bottom: 10px;
+            }
+            
+            .download-btn {
+                padding: 8px 12px;
+                font-size: 0.75rem;
+            }
+            
+            .logs-container {
+                max-height: 150px;
+                font-size: 0.7rem;
+                padding: 10px;
+            }
+            
+            .log-entry {
+                padding: 5px 6px;
+                margin-bottom: 3px;
+                font-size: 0.7rem;
+            }
+            
+            .log-time {
+                font-size: 0.65rem;
+                min-width: 55px;
+            }
+            
+            .log-message {
+                font-size: 0.7rem;
+            }
+            
+            .info-button {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+                top: 8px;
+                right: 8px;
             }
         }
         
         /* Tablet Landscape - Slightly different layout */
         @media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
             .app-container {
-                grid-template-columns: 300px 1fr 320px;
-                grid-template-rows: 70px 1fr;
-                gap: 12px;
-                padding: 12px;
+                grid-template-columns: 280px 1fr 300px;
+                grid-template-rows: 65px 1fr;
+                gap: 10px;
+                padding: 10px;
             }
             
             .header h1 {
-                font-size: 1.6em;
-            }
-            
-            .controls-panel,
-            .observations-panel {
-                height: calc(100vh - 90px);
+                font-size: 1.5em;
             }
             
             .matrix-cell {
-                width: 32px;
-                height: 32px;
-                font-size: 0.85rem;
+                width: 28px;
+                height: 28px;
+                font-size: 0.8rem;
             }
             
             .matrix-display {
-                min-height: 250px;
+                min-height: 220px;
             }
         }
         
-        /* Mobile Portrait Orientation Overlay */
+        /* Small Mobile Landscape */
+        @media screen and (max-width: 680px) and (orientation: landscape) {
+            .app-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto auto;
+                gap: 8px;
+                padding: 8px;
+            }
+            
+            .header {
+                grid-column: 1;
+                padding: 8px 12px;
+            }
+            
+            .header h1 {
+                font-size: 1.1em;
+            }
+            
+            .controls-panel {
+                grid-column: 1;
+                grid-row: 2;
+                padding: 10px;
+            }
+            
+            .experiment-area {
+                grid-column: 1;
+                grid-row: 3;
+                min-height: 280px;
+            }
+            
+            .observations-panel {
+                grid-column: 1;
+                grid-row: 4;
+                padding: 10px;
+            }
+            
+            .control-section {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                padding: 10px;
+            }
+            
+            .control-section h3 {
+                width: 100%;
+                font-size: 0.85em;
+                margin-bottom: 5px;
+            }
+            
+            .control-group {
+                flex: 1;
+                min-width: 120px;
+                margin-bottom: 0;
+                padding: 8px;
+            }
+            
+            .matrix-cell {
+                width: 20px;
+                height: 20px;
+                font-size: 0.6rem;
+            }
+            
+            .matrix {
+                padding: 6px;
+            }
+        }
+        
+        /* Mobile Portrait Orientation - Now fully supported! */
         .rotate-device-overlay {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            z-index: 10000;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .rotate-device-overlay .rotate-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            animation: rotateAnimation 2s ease-in-out infinite;
-        }
-
-        .rotate-device-overlay h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .rotate-device-overlay p {
-            font-size: 1rem;
-            opacity: 0.9;
-            line-height: 1.5;
-            max-width: 300px;
         }
 
         @keyframes rotateAnimation {
@@ -1167,13 +1738,94 @@
             25% { transform: rotate(-15deg); }
             75% { transform: rotate(15deg); }
         }
-
-        @media screen and (max-width: 768px) and (orientation: portrait) {
-            .rotate-device-overlay {
-                display: flex !important;
+        
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .matrix-cell:hover {
+                transform: none;
             }
             
+            .matrix-cell:active {
+                background: #e2e8f0;
+                transform: scale(0.95);
+            }
+            
+            .btn:hover {
+                transform: none;
+            }
+            
+            .btn:active {
+                transform: scale(0.98);
+            }
+            
+            .stat-card:hover {
+                transform: none;
+            }
+            
+            .code-download-card:hover {
+                transform: none;
+            }
+            
+            .download-btn:hover {
+                transform: none;
+            }
+            
+            .download-btn:active {
+                transform: scale(0.98);
+            }
+            
+            .info-button:hover {
+                transform: none;
+            }
+            
+            .info-button:active {
+                transform: scale(0.95);
+            }
+            
+            /* Improve touch target sizes */
+            .control-group select {
+                min-height: 44px;
+            }
+            
+            .btn {
+                min-height: 44px;
+            }
+            
+            .download-btn {
+                min-height: 44px;
+            }
+        }
+        
+        /* Improve scrolling on mobile */
+        @media (max-width: 768px) {
+            .controls-panel,
+            .observations-panel,
+            .experiment-area {
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .logs-container {
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .info-modal-body {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        /* Print styles for better accessibility */
+        @media print {
             .app-container {
+                display: block;
+            }
+            
+            .controls-panel,
+            .observations-panel {
+                page-break-inside: avoid;
+            }
+            
+            .info-button,
+            .info-modal {
                 display: none !important;
             }
         }
