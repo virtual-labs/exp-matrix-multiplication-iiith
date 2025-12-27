@@ -1566,23 +1566,3 @@ TESTING YOUR INPUT FILES:
                 }
             });
         });
-
-        // Mobile orientation handling
-        function checkOrientation() {
-            const overlay = document.querySelector('.rotate-device-overlay');
-            const isMobile = window.innerWidth < 768;
-            const isPortrait = window.innerHeight > window.innerWidth;
-            
-            if (isMobile && isPortrait) {
-                overlay.style.display = 'flex';
-            } else {
-                overlay.style.display = 'none';
-            }
-        }
-
-        // Check orientation on load and resize
-        window.addEventListener('load', checkOrientation);
-        window.addEventListener('resize', checkOrientation);
-        window.addEventListener('orientationchange', () => {
-            setTimeout(checkOrientation, 100);
-        });
