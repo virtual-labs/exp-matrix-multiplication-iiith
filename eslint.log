@@ -1,0 +1,15 @@
+
+/home/runner/work/exp-matrix-multiplication-iiith/exp-matrix-multiplication-iiith/experiment/simulation/script.js
+   362:53   warning  'processId' is defined but never used  no-unused-vars
+   372:102  warning  'index' is defined but never used      no-unused-vars
+  1179:10   warning  Unnecessary escape character: \$       no-useless-escape
+  1180:14   warning  Unnecessary escape character: \$       no-useless-escape
+  1181:24   warning  Unnecessary escape character: \$       no-useless-escape
+  1181:42   warning  Unnecessary escape character: \$       no-useless-escape
+  1187:10   warning  Unnecessary escape character: \$       no-useless-escape
+  1188:14   warning  Unnecessary escape character: \$       no-useless-escape
+  1189:24   warning  Unnecessary escape character: \$       no-useless-escape
+  1189:42   warning  Unnecessary escape character: \$       no-useless-escape
+
+✖ 10 problems (0 errors, 10 warnings)
+
